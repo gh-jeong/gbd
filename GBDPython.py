@@ -57,13 +57,13 @@ def table_1(data, cause, measure, risk=None): #todo Table 1
     :return: table (as dataframe)
     '''
     
-    df_t = pd.DataFrame(columns=["Measure"] + cause)
+    list_for_df = []
 
     if not risk:
         for cause in cause:
             for measure in measure:
-                data_t = data[(data['cause_name']==cause) & (data['measure_id']==measure) & (data['location_id']==1) & (data['age_id']==22) & (data['sex_id']==3) & (data['metric_id']==1) & (data['year']==2019)]
-                value_t = combine_val(data_t['val'], data_t['lower'], data_t['upper'])
+                value_t = gbd_retrieve(data, measure, "Global", age=22, metric=1, year=2019)
+                list_for_df = list_for_df + [[measure, value_t]]
                 
                 pass
             pass
